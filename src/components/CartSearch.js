@@ -11,12 +11,12 @@
  `;
  
  const CartSearch = (props) => {
-    const {products, cartItems, setCartItems} = props;
+    const {products, cartItems, setCartItems,addItemToCart} = props;
     const [search, setSearch] = useState([]);
      return (
          <div>
              <ProductSearch products={products} setSearch={setSearch} />
-             <Cart cartItems={cartItems} setCartItems={setCartItems} search={search}/>
+             <Cart cartItems={cartItems} setCartItems={setCartItems} addItemToCart={addItemToCart} search={search}/>
          </div>
      )
  }

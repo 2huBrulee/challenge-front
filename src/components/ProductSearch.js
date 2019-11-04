@@ -3,14 +3,12 @@ import styled from "styled-components";
 
 const Search = styled.input`
   width: 100%;
-  height: 25px;
-  border-color: gray;
-  border-width: 1px;
-  border-top-left-radius: 3% 10%;
-  border-bottom-left-radius: 3% 10%;
-  border-bottom-right-radius: 3% 10%;
-  border-top-right-radius: 3% 10%;
-  padding: 5px;
+  padding: 15px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 `;
 
 const onChange = (suggestions, setSearch) => e => {

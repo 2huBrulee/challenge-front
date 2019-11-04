@@ -13,9 +13,10 @@ const Panel = styled.div`
 `;
 
 const Cart = props => {
-  const { search, cartItems, setCartItems } = props;
+  const { search, cartItems, setCartItems, addItemToCart } = props;
 
   console.log(search);
+  console.log(cartItems);
 
   return (
     <Panel>
@@ -25,6 +26,7 @@ const Cart = props => {
             key={searchItem.id}
             {...searchItem}
             setCartItems={setCartItems}
+            addItemToCart={addItemToCart}
           />
         ))
       ) : cartItems.length > 0 ? (

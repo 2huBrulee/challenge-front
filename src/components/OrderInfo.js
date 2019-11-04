@@ -5,11 +5,12 @@ import OrderDetails from './OrderDetails';
 import OrderCompleteButton from './OrderCompleteButton';
 
 const OrderInfo = props => {
+    const { totalPrice} = props;
     return (
         <div>
             <ShippingInfo/>
-            <OrderDetails/>
-            <OrderCompleteButton/>
+            <OrderDetails totalPrice={totalPrice}/>
+            <OrderCompleteButton disabled={totalPrice<50}/>
         </div>
     )
 }

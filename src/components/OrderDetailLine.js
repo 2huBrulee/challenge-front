@@ -10,7 +10,8 @@ const RightSideText = styled.span`
 `;
 
 const Line = styled.div`
-    width:100%;
+    width:90%;
+    margin: 5px;
     display: inline-block;
     background-color: ${props=> props.Shipping ? 'yellow': '#ffffff'};
     ${props=>props.Total && 'font-weight: bold'};

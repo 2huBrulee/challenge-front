@@ -16,12 +16,6 @@ const Body = styled.div`
 function App() {
   return (
     <Body>
-      <h1>RIQRA</h1>
-      <nav>
-        <Link to="/">Compras</Link>
-        <Link to="/ordenProcesada/2">Gracias</Link>
-      </nav>
-
       <Router>
         <Shop path="/" />
         <Thanks path="/ordenProcesada/:nOrden"/>

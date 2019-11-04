@@ -1,8 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import OrderInfo from "../components/OrderInfo";
 import CartSearch from "../components/CartSearch";
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 import { useQuery } from "react-apollo";
 
 const GET_PRODUCTS = gql`
@@ -28,17 +28,40 @@ const Column = styled.div`
   margin: 5%;
 `;
 
+const calculateTotalPrice = cart => cart.length>0 ? cart.reduce((sum,cartItem)=>{
+    console.log(sum)
+    console.log(cartItem)
+    return sum+cartItem.unitPrice*cartItem.quantity},0):0;
+
 const Shop = () => {
-  const [cartItems, setCartitems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const { data } = useQuery(GET_PRODUCTS);
+
+  const addItemToCart = newCartItem => {
+    let foundFlag = false;
+    const newItems = cartItems.map(cartItem => {
+      if (cartItem.id === newCartItem.id) {
+        foundFlag = true;
+        return { ...cartItem, quantity: cartItem.quantity + 1 };
+      }
+      return cartItem;
+    });
+    if (foundFlag === true) setCartItems(newItems);
+    else setCartItems([...newItems, newCartItem]);
+  };
 
   return (
     <Content>
       <Column>
-        <CartSearch cartItems={cartItems} setCartitems={setCartitems} products={data?data.products:[]}/>
+        <CartSearch
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          addItemToCart={addItemToCart}
+          products={data ? data.products : []}
+        />
       </Column>
       <Column>
-        <OrderInfo cartItems/>
+        <OrderInfo totalPrice={calculateTotalPrice(cartItems)} />
       </Column>
     </Content>
   );

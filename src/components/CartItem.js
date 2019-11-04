@@ -35,7 +35,14 @@ const Price = styled.div`
 
 
 const CartItem = (props) => {
-    const { name, unitPrice,id,description, setCartItems} = props;
+    const { name, unitPrice,id,description, setCartItems, addItemToCart} = props;
+    const quantity = props.quantity ? props.quantity : 0;
+
+    const addItem = e => {
+        console.log('agregandooo...')
+        addItemToCart({name,unitPrice,description,id,quantity:quantity+1});
+    }
+
     return (
         <Item>
             <Img src='https://pilandina.com.bo/wp-content/uploads/2019/06/Yogurt-Bebible-Light-sabor-frutilla-1kg-600x600.jpg'/>
@@ -44,7 +51,7 @@ const CartItem = (props) => {
                 <Details>{description}</Details>
                 <Price>{'S/. '+unitPrice}</Price>
             </Product>
-            <Counter setCartItems={setCartItems}/>
+            <Counter onClick={addItem} quantity={quantity} setCartItems={setCartItems}/>
         </Item>
     )
 }

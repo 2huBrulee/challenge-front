@@ -12,8 +12,9 @@ const Button = styled.button`
 `;
 
 const Counter = props => {
+    const { quantity,onClick} =props;
     return (
-        <Button>{props.children}</Button>
+        <Button onClick={onClick}>{quantity===0?'+':quantity}</Button>
     )
 }
 

@@ -4,17 +4,29 @@ import OrderDetailLine from './OrderDetailLine';
 
 const Container = styled.div`
     background-color:#ffffff;
-    border-radius:5%;
-    padding:10px;
+    padding:12px 20px;
+    margin: 15px;
 `;
 
-const OrderDetails = () => {
+const getValues = totalPrice => {
+    const productPrice = (totalPrice)*100/118.0;
+    return {
+        productPrice : productPrice.toFixed(2),
+        taxes:(totalPrice-productPrice).toFixed(2),
+        shipping: (totalPrice/10.0).toFixed(2),
+        total: (totalPrice*1.1).toFixed(2),
+    }
+}
+
+const OrderDetails = (props) => {
+    const { productPrice, taxes, shipping,total }= getValues(props.totalPrice);
+
     return (
         <Container>
-            <OrderDetailLine Products label='Products' value='$10'/>
-            <OrderDetailLine Shipping label='Shipping Cost' value='$10'/>
-            <OrderDetailLine Taxes label='Taxes' value='$10'/>
-            <OrderDetailLine Total label='Total' value='$10'/>
+            <OrderDetailLine Products label='Products' value={'$ '+productPrice}/>
+            <OrderDetailLine Shipping label='Shipping Cost' value={'$ '+shipping}/>
+            <OrderDetailLine Taxes label='Taxes' value={'$ '+taxes}/>
+            <OrderDetailLine Total label='Total' value={'$ '+total}/>
         </Container>
     )
 }
