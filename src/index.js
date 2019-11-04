@@ -8,7 +8,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const SERVER_BASE_URL = 'http://localhost:8000/graphql';
+const SERVER_BASE_URL = 'https://challenge-riq1.herokuapp.com/graphql';
 const httpLink = new HttpLink({
   uri: SERVER_BASE_URL,
 });
