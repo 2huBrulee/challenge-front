@@ -28,6 +28,7 @@ const Content = styled.div`
   margin: auto;
   display: flex;
   min-height: 100%;
+  height:100%;
 `;
 
 const Column = styled.div`
@@ -36,11 +37,8 @@ const Column = styled.div`
 `;
 
 const calculateTotalPrice = cart => {
-  console.log(cart);
   return cart.length > 0
     ? cart.reduce((sum, cartItem) => {
-        console.log(sum);
-        console.log(cartItem);
         return sum + cartItem.unitPrice * cartItem.quantity;
       }, 0)
     : 0;
@@ -62,13 +60,10 @@ const Shop = () => {
   const [createOrder] = useMutation(CREATE_ORDER);
 
   const createNewOrder = () => {
-    console.log("eweeee");
     const newOrderProducts = getCartDataForOrder(cartItems);
-    console.log(newOrderProducts);
     createOrder({
       variables: { products: newOrderProducts }
     }).then(result => {
-      console.log(result);
       navigate(`/ordenProcesada/${result.data.createOrder}`);
     });
   };
