@@ -35,6 +35,7 @@ const Cart = props => {
             key={cartItem.id}
             {...cartItem}
             setCartItems={setCartItems}
+            addItemToCart={addItemToCart}
             />
         ))
       ) : (

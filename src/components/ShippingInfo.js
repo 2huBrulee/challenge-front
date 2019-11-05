@@ -15,7 +15,7 @@ const ShippingDate = styled.span`
 `;
 
 const getShippingDay = ()=>{
-    const shippingDay = moment().add(5,'days');
+    const shippingDay = moment().add(1,'days');
     if (shippingDay.isoWeekday()===6)
         shippingDay.add(2,'days');
         if (shippingDay.isoWeekday()===7)

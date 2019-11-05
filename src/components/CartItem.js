@@ -32,8 +32,6 @@ const Price = styled.div`
 
 `;
 
-
-
 const CartItem = (props) => {
     const { name, unitPrice,id,description, setCartItems, addItemToCart} = props;
     const quantity = props.quantity ? props.quantity : 0;
