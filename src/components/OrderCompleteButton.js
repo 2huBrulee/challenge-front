@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "@reach/router";
 
 const Button = styled.button`
   width: 90%;
@@ -17,12 +16,20 @@ const Button = styled.button`
   font-size: 16px;
   color: white;
   font-family: "Open Sans", sans-serif;
+  cursor: pointer;
+  :disabled {
+      background-color: #ccc;
+    opacity: 0.4;
+  }
 `;
 
-const OrderCompleteButton = () => {
+const OrderCompleteButton = props => {
+  const { createNewOrder, disabled } = props;
+  console.log(createNewOrder);
   return (
-    
-      <Link to="/ordenProcesada/2"><Button>COMPLETE ORDER</Button></Link>
+    <Button disabled={disabled} onClick={createNewOrder}>
+      COMPLETE ORDER
+    </Button>
   );
 };
 

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import OrderInfo from "../components/OrderInfo";
 import CartSearch from "../components/CartSearch";
 import gql from "graphql-tag";
-import { useQuery } from "react-apollo";
+import { useQuery, useMutation } from "react-apollo";
+import { navigate } from "@reach/router";
 
 const GET_PRODUCTS = gql`
   {
@@ -13,6 +14,12 @@ const GET_PRODUCTS = gql`
       unitPrice
       description
     }
+  }
+`;
+
+const CREATE_ORDER = gql`
+  mutation CreateOrder($products: [OrderProduct!]!) {
+    createOrder(products: $products)
   }
 `;
 
@@ -28,14 +35,43 @@ const Column = styled.div`
   margin: 5%;
 `;
 
-const calculateTotalPrice = cart => cart.length>0 ? cart.reduce((sum,cartItem)=>{
-    console.log(sum)
-    console.log(cartItem)
-    return sum+cartItem.unitPrice*cartItem.quantity},0):0;
+const calculateTotalPrice = cart => {
+  console.log(cart);
+  return cart.length > 0
+    ? cart.reduce((sum, cartItem) => {
+        console.log(sum);
+        console.log(cartItem);
+        return sum + cartItem.unitPrice * cartItem.quantity;
+      }, 0)
+    : 0;
+};
+
+const getCartDataForOrder = cart =>
+  cart.map(item =>
+    Object.keys(item)
+      .filter(key => key === "id" || key === "quantity")
+      .reduce(
+        (newObject, currKey) => ({ ...newObject, [currKey]: item[currKey] }),
+        {}
+      )
+  );
 
 const Shop = () => {
   const [cartItems, setCartItems] = useState([]);
   const { data } = useQuery(GET_PRODUCTS);
+  const [createOrder] = useMutation(CREATE_ORDER);
+
+  const createNewOrder = () => {
+    console.log("eweeee");
+    const newOrderProducts = getCartDataForOrder(cartItems);
+    console.log(newOrderProducts);
+    createOrder({
+      variables: { products: newOrderProducts }
+    }).then(result => {
+      console.log(result);
+      navigate(`/ordenProcesada/${result.data.createOrder}`);
+    });
+  };
 
   const addItemToCart = newCartItem => {
     let foundFlag = false;
@@ -61,7 +97,10 @@ const Shop = () => {
         />
       </Column>
       <Column>
-        <OrderInfo totalPrice={calculateTotalPrice(cartItems)} />
+        <OrderInfo
+          totalPrice={calculateTotalPrice(cartItems)}
+          createNewOrder={createNewOrder}
+        />
       </Column>
     </Content>
   );
