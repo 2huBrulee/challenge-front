@@ -25,7 +25,6 @@ const Button = styled.button`
 
 const OrderCompleteButton = props => {
   const { createNewOrder, disabled } = props;
-  console.log(createNewOrder);
   return (
     <Button disabled={disabled} onClick={createNewOrder}>
       COMPLETE ORDER

@@ -1,25 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
-    border-radius:50%;
-    background:rgb(255,128,0);
-    height: 50px;
-    width: 50px;
-    font-style: white;
-    cursor:pointer;
+  border-radius: 50%;
+  border-width: 0px;
+  background: rgb(255, 128, 0);
+  cursor: pointer;
+  display: inline-flex;
+  -webkit-box-align: center;
+  height: 48px;
+  width: 48px;
+  font-style: white;
+  color: white;
+  font-size: 22px;
+  font-weight: 180;
+  line-height: 24px;
+  font-family: "Open Sans", sans-serif;
+  justify-content: center;
+  vertical-align: middle;
+  position: relative;
+  padding: 0px;
+  border-image: initial;
 `;
 
 const Counter = props => {
-    const { quantity,onClick} =props;
-    return (
-        <Button onClick={onClick}>{quantity===0?'+':quantity}</Button>
-    )
-}
+  const { quantity,changeModifierVisibility } = props;
+  return <Button onClick={changeModifierVisibility}>{quantity === 0 ? "+" : quantity}</Button>;
+};
 
-Counter.propTypes = {
-
-}
-
-export default Counter
+export default Counter;
