@@ -50,7 +50,9 @@ const Price = styled.div`
   font-family: "Open Sans", sans-serif;
 `;
 const Container = styled.div`
-  border-top-width: thin;
+  border-bottom-width: thin;
+  border-bottom-style:solid;
+  border-color:#ccc;
   display: flex;
   position: relative;
   padding: 12px;
