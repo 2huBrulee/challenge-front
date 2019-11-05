@@ -12,7 +12,6 @@ const Button = styled.button`
   width: 48px;
   font-style: white;
   color: white;
-  font-size: 22px;
   font-weight: 180;
   line-height: 24px;
   font-family: "Open Sans", sans-serif;
@@ -21,11 +20,12 @@ const Button = styled.button`
   position: relative;
   padding: 0px;
   border-image: initial;
+  ${props => props.quantity>0? "font-size: 18px;":"font-size: 32px;"};
 `;
 
 const Counter = props => {
   const { quantity,changeModifierVisibility } = props;
-  return <Button onClick={changeModifierVisibility}>{quantity === 0 ? "+" : quantity}</Button>;
+  return <Button onClick={changeModifierVisibility} quantity={quantity}>{quantity === 0 ? "+" : quantity}</Button>;
 };
 
 export default Counter;

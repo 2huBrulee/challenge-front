@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ItemQuantity from "./ItemQuantity";
 
 const Item = styled.div`
-  height: 70px;
+  height: 80px;
   width: 100%;
   padding: 3px;
   display: flex;
@@ -22,7 +22,7 @@ const Product = styled.div`
 
 const Name = styled.div`
   user-select: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 24px;
   font-family: "Open Sans", sans-serif;
@@ -33,7 +33,7 @@ const Name = styled.div`
 
 const Details = styled.div`
   color: rgb(51, 51, 51);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 18px;
   font-family: "Open Sans", sans-serif;
@@ -72,18 +72,34 @@ const CartItem = props => {
     unitPrice,
     id,
     description,
-    addItemToCart
+    addItemToCart,
+    substract,
+    deleteFromCart
   } = props;
-  const quantity = props.quantity ? props.quantity : 0;
+
+  const quantity = props.cartItems
+    ? props.cartItems.reduce(
+        (quantity, cartItem) =>
+          cartItem.id === id ? quantity + cartItem.quantity : quantity + 0,
+        0
+      )
+    : 0;
 
   const [quantityModifierVisibility, setQuantityModifierVisibility] = useState(
     false
   );
 
-  const changeModifierVisibility = ()=> setQuantityModifierVisibility(!quantityModifierVisibility);
+  const changeModifierVisibility = () =>
+    setQuantityModifierVisibility(!quantityModifierVisibility);
 
   const addItem = e =>
     addItemToCart({ name, unitPrice, description, id, quantity: quantity + 1 });
+
+  const substractOne = e => {
+    if (!substract(id)) changeModifierVisibility();
+  };
+
+  const deleteItem = e => deleteFromCart(id);
 
   return (
     <Container>
@@ -95,12 +111,17 @@ const CartItem = props => {
           <Price>{"S/. " + unitPrice}</Price>
         </Product>
       </Item>
-      <Shade onClick={changeModifierVisibility} isVisible={quantityModifierVisibility} />
+      <Shade
+        onClick={changeModifierVisibility}
+        isVisible={quantityModifierVisibility}
+      />
       <ItemQuantity
         quantityVisibility={quantityModifierVisibility}
         addItem={addItem}
         changeModifierVisibility={changeModifierVisibility}
         quantity={quantity}
+        substract={substractOne}
+        deleteItem={deleteItem}
       />
     </Container>
   );

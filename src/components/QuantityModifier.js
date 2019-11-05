@@ -30,9 +30,9 @@ const Section = styled.div`
 
 
 const QuantityModifier = (props) => {
-    const {quantity, addItem, substractFromItem} = props;
+    const {quantity, addItem, substract} = props;
   return <Box>
-      <Section>-</Section>
+      <Section onClick={substract}>-</Section>
       <Section quantitySection>{quantity}</Section>
       <Section onClick={addItem}>+</Section>
   </Box>;

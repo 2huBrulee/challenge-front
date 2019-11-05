@@ -86,13 +86,37 @@ const Shop = () => {
     else setCartItems([...newItems, newCartItem]);
   };
 
+  const substract = itemId => {
+    let foundFlag = false;
+    let deletionFlag = false;
+    const newItems = cartItems.map(cartItem => {
+      if (cartItem.id === itemId) {
+        foundFlag = true;
+        if (cartItem.quantity < 1) deletionFlag = true;
+        return { ...cartItem, quantity: cartItem.quantity - 1 };
+      }
+      return cartItem;
+    });
+    if (foundFlag === true) {
+      if (deletionFlag === true) deleteFromCart(itemId);
+      else setCartItems(newItems);
+    }
+    return foundFlag && !deletionFlag;
+  };
+
+  const deleteFromCart = itemId => {
+    const newItems = cartItems.filter(cartItem => cartItem.id !== itemId);
+    setCartItems(newItems);
+  };
+
   return (
     <Content>
       <Column>
         <CartSearch
           cartItems={cartItems}
-          setCartItems={setCartItems}
           addItemToCart={addItemToCart}
+          substract={substract}
+          deleteFromCart={deleteFromCart}
           products={data ? data.products : []}
         />
       </Column>

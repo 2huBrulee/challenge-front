@@ -5,18 +5,13 @@ import EmptyCart from "./EmptyCart";
 
 const Panel = styled.div`
   min-height: 80%;
-  flex-grow: 1;
   background-color: white;
-  padding: 5px;
   margin-top: 10px;
   width: 100%;
 `;
 
 const Cart = props => {
-  const { search, cartItems, setCartItems, addItemToCart } = props;
-
-  console.log(search);
-  console.log(cartItems);
+  const { search, cartItems, addItemToCart,substract,deleteFromCart } = props;
 
   return (
     <Panel>
@@ -25,8 +20,10 @@ const Cart = props => {
           <CartItem
             key={searchItem.id}
             {...searchItem}
-            setCartItems={setCartItems}
+            cartItems ={cartItems}
             addItemToCart={addItemToCart}
+            deleteFromCart={deleteFromCart}
+            substract={substract}
           />
         ))
       ) : cartItems.length > 0 ? (
@@ -34,8 +31,9 @@ const Cart = props => {
             <CartItem
             key={cartItem.id}
             {...cartItem}
-            setCartItems={setCartItems}
             addItemToCart={addItemToCart}
+            deleteFromCart={deleteFromCart}
+            substract={substract}
             />
         ))
       ) : (

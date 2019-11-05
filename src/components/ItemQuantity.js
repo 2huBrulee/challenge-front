@@ -4,6 +4,7 @@ import Counter from "./Counter";
 import QuantityModifier from "./QuantityModifier";
 
 const Container = styled.div`
+  padding: 8px 0px;
   display: flex;
   position: absolute;
   right: 16px;
@@ -22,7 +23,7 @@ const ItemQuantity = props => {
     addItem,
     quantity,
     deleteItem,
-    substractFromItem,
+    substract,
     quantityVisibility
   } = props;
 
@@ -32,7 +33,7 @@ const ItemQuantity = props => {
         <QuantityModifier
           addItem={addItem}
           quantity={quantity}
-          substractFromItem={substractFromItem}
+          substract={substract}
         />
       ) : (
         <Counter
@@ -40,7 +41,7 @@ const ItemQuantity = props => {
           quantity={quantity}
         />
       )}
-      <Delete onClick={e => console.log("clicky")}>delete</Delete>
+      <Delete onClick={deleteItem}>delete</Delete>
     </Container>
   );
 };

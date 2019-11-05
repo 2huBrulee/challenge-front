@@ -14,7 +14,7 @@ const OrderInfo = props => {
         <Container>
             <ShippingInfo/>
             <OrderDetails totalPrice={totalPrice}/>
-            <OrderCompleteButton disabled={totalPrice<50} createNewOrder={createNewOrder}/>
+            <OrderCompleteButton disabled={totalPrice*1.1<50} createNewOrder={createNewOrder}/>
         </Container>
     )
 }
