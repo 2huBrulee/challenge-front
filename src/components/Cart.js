@@ -31,6 +31,7 @@ const Cart = props => {
             <CartItem
             key={cartItem.id}
             {...cartItem}
+            cartItems ={cartItems}
             addItemToCart={addItemToCart}
             deleteFromCart={deleteFromCart}
             substract={substract}
