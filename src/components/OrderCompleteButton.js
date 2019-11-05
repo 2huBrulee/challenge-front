@@ -5,8 +5,11 @@ const Button = styled.button`
   width: 90%;
   flex-direction: column;
   background: rgb(255, 128, 0);
-  border: none;
-  border-radius: 4px;
+  border-width:inherit;
+  border-style: solid;
+  border-color: #ccc;
+  border-radius: 0px;
+  border-radius: 3px;
   box-sizing: border-box;
   align-items: center;
   height: 40px;
@@ -18,7 +21,10 @@ const Button = styled.button`
   font-family: "Open Sans", sans-serif;
   cursor: pointer;
   :disabled {
-      background-color: #ccc;
+    border-width:1px;
+    cursor:default;
+    background-color: #f6f8fa;
+    color: #ccc;
     opacity: 0.4;
   }
 `;

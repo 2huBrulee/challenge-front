@@ -25,7 +25,7 @@ const Box = styled.div`
 const Section = styled.div`
     width:40px;
     text-align:center;
-    ${props => props.quantity && "cursor:default"};
+    ${props => props.quantitySection && "cursor:default"};
 `;
 
 
@@ -33,7 +33,7 @@ const QuantityModifier = (props) => {
     const {quantity, addItem, substractFromItem} = props;
   return <Box>
       <Section>-</Section>
-      <Section quantity>{quantity}</Section>
+      <Section quantitySection>{quantity}</Section>
       <Section onClick={addItem}>+</Section>
   </Box>;
 };

@@ -16,8 +16,6 @@ const Delete = styled.div`
   cursor: pointer;
 `;
 
-const Section = styled.div``;
-
 const ItemQuantity = props => {
   const {
     changeModifierVisibility,
